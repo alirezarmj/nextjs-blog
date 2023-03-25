@@ -1,9 +1,8 @@
-import FeaturedPosts from "@/components/home-page/featured-posts"
-import Hero from "@/components/home-page/hero"
-import { getFeaturedPosts } from "@/helper/posts-util"
+import AllPosts from "@/components/posts/all-posts"
+import { getAllPosts } from "@/helper/posts-util"
 
 
-const HomePage = (props) => {
+const AllPostPages = (props) => {
   // const dummyList = [
   //   {
   //     title: 'Getting Started With Nextjs',
@@ -34,30 +33,22 @@ const HomePage = (props) => {
   //     date: '2024-02-10',
   //   },
   // ]
-
+ 
   return (
-    <>
-      <Hero />
-      <FeaturedPosts posts={props.posts} />
-    </>
+    <AllPosts posts={props.allPosts}/>
   )
 }
 
 
 
-
 export function getStaticProps(){
-  const featuredPosts=getFeaturedPosts();
+  const allPosts=getAllPosts();
   return {
     props:{
-      posts:featuredPosts
+      allPosts
     }
   }
+
 }
 
-
-
-
-
-
-export default HomePage
+export default AllPostPages
