@@ -7,6 +7,7 @@ const ContactForm = () => {
     const emailRef = useRef();
     const nameRef = useRef();
     const messageRef = useRef();
+    
     const [currentStatus, setCurrentStatus] = useState()
     const [errorHandler, setErrorHandler] = useState()
 
@@ -17,6 +18,7 @@ const ContactForm = () => {
         const enterdEmail = emailRef.current.value;
         const enterdName = nameRef.current.value;
         const enterdMessage = messageRef.current.value;
+
         //Validation Form inputs in client side
         if (!enterdEmail || !enterdEmail.includes('@') || !enterdName || enterdName.trim() === '' || !enterdMessage || enterdMessage.trim() === '') {
             setInvalidInput(true);
@@ -27,10 +29,10 @@ const ContactForm = () => {
         try {
             const response = await axios.post('/api/contact', { email: enterdEmail, name: enterdName, message: enterdMessage })
             setCurrentStatus('success')
-            console.log(response.data)
+            // console.log(response.data)
         } catch (error) {
             setErrorHandler(error.message)
-            console.log(error.message)
+            // console.log(error.message)
             setCurrentStatus('error')
         }
 
@@ -89,16 +91,16 @@ const ContactForm = () => {
                     <div className='flex justify-between  gap-2'>
                         <div >
                             <label htmlFor="email" className='text-2xl font-bold'>Your Email:</label>
-                            <input ref={emailRef} type="email" id="email" className='w-full rounded-md p-2 text-xl' />
+                            <input required ref={emailRef} type="email" id="email" className='w-full rounded-md p-2 text-xl' />
                         </div>
                         <div >
                             <label htmlFor="name" className='text-2xl font-bold'>Your Name:</label>
-                            <input ref={nameRef} type="text" id="name" className='w-full rounded-md p-2 text-xl' />
+                            <input required ref={nameRef} type="text" id="name" className='w-full rounded-md p-2 text-xl' />
                         </div>
                     </div>
                     <div className='flex flex-col'>
                         <label htmlFor="message" className='text-2xl font-bold'>Your Message:</label>
-                        <textarea ref={messageRef} id="message" rows="5" className='rounded-md p-2 text-xl' />
+                        <textarea required ref={messageRef} id="message" rows="5" className='rounded-md p-2 text-xl' />
                     </div>
                     <div>
                         <button className='px-4 py-1 bg-purple-800 text-white rounded-md text-xl'>Send Message</button>
